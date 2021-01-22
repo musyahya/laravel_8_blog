@@ -15,7 +15,7 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        $kategori = Kategori::select('id', 'nama', 'slug')->latest()->paginate(10);
+        $kategori = Kategori::select('id', 'nama', 'slug')->latest()->simplePaginate(5);
         return view('admin/kategori/index', compact('kategori'));
     }
 
@@ -42,7 +42,7 @@ class KategoriController extends Controller
         ]);
 
         Kategori::create([
-            'nama' => $request->nama,
+            'nama' => Str::title($request->nama),
             'slug' => Str::slug($request->nama, '-')
         ]);
 
@@ -73,7 +73,8 @@ class KategoriController extends Controller
      */
     public function edit($id)
     {
-        //
+        $kategori = Kategori::select('id', 'nama')->whereId($id)->first();
+        return view('admin/kategori/edit', compact('kategori'));
     }
 
     /**
@@ -85,7 +86,21 @@ class KategoriController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nama' => 'required',
+        ]);
+
+        Kategori::whereId($id)->update([
+            'nama' => Str::title($request->nama),
+            'slug' => Str::slug($request->nama, '-')
+        ]);
+
+        $request->session()->flash('sukses', '
+            <div class="alert alert-success" role="alert">
+                Data berhasil diubah
+            </div>
+        ');
+        return redirect('/kategori');
     }
 
     /**
@@ -94,8 +109,15 @@ class KategoriController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        Kategori::whereId($id)->delete();
+
+        $request->session()->flash('sukses', '
+            <div class="alert alert-success" role="alert">
+                Data berhasil dihapus
+            </div>
+        ');
+        return redirect('/kategori');
     }
 }

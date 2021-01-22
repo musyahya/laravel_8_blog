@@ -30,7 +30,7 @@
         <div id="main" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="/post">Post</a>
-            <a class="collapse-item" href="cards.html">Kategori</a>
+            <a class="collapse-item" href="/kategori">Kategori</a>
             <a class="collapse-item" href="cards.html">Tag</a>
             <a class="collapse-item" href="cards.html">Banner</a>
           </div>

@@ -22,6 +22,18 @@
             @enderror
         </div>
         <div class="form-group">
+            <label for="kategori">Kategori</label>
+            <select class="form-control" id="kategori" name="kategori">
+                <option selected disabled>Pilih Katgeori</option>
+                @foreach ($kategori as $row)
+                    <option value="{{$row->id}}">{{$row->nama}}</option>
+                @endforeach
+            </select>
+            @error('kategori')
+                <small class="text-danger">{{ $message }}</small>
+            @enderror
+        </div>
+        <div class="form-group">
             <label for="konten">Konten</label>
             <textarea class="form-control" id="konten" rows="10" name="konten">{{old('konten')}}</textarea>
             @error('konten')

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kategori;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -16,7 +17,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $post = Post::select('id', 'judul', 'sampul', 'slug')->latest()->paginate(10);
+        $post = Post::select('id', 'judul', 'sampul', 'slug', 'id_kategori')->latest()->paginate(10);
         return view('admin/post/index', compact('post'));
     }
 
@@ -27,7 +28,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin/post/create');
+        $kategori = Kategori::select('id', 'nama')->get();
+        return view('admin/post/create', compact('kategori'));
     }
 
     /**
@@ -42,6 +44,7 @@ class PostController extends Controller
             'judul' => 'required',
             'sampul' => 'required|mimes:jpg,jpeg,png',
             'konten' => 'required',
+            'kategori' => 'required',
         ]);
 
         $sampul = time() .'-' .$request->sampul->getClientOriginalName();
@@ -51,6 +54,7 @@ class PostController extends Controller
             'sampul' => $sampul,
             'judul' => $request->judul,
             'konten' => $request->konten,
+            'id_kategori' => $request->kategori,
             'slug' => Str::slug($request->judul, '-'),
         ]);
 
@@ -82,8 +86,9 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        $post = Post::select('id', 'judul', 'sampul', 'konten')->whereId($id)->firstOrFail();
-        return view('admin/post/edit', compact('post'));
+        $kategori = Kategori::select('id', 'nama')->get();
+        $post = Post::select('id', 'judul', 'sampul', 'konten', 'id_kategori')->whereId($id)->firstOrFail();
+        return view('admin/post/edit', compact('post', 'kategori'));
     }
 
     /**
@@ -99,11 +104,13 @@ class PostController extends Controller
             'judul' => 'required',
             'sampul' => 'mimes:jpg,jpeg,png',
             'konten' => 'required',
+            'kategori' => 'required',
         ]);
 
         $data = [
             'judul' => $request->judul,
             'konten' => $request->konten,
+            'kategori' => $request->kategori,
             'slug' => Str::slug($request->judul, '-'),
         ];
 

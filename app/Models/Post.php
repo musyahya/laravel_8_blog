@@ -10,5 +10,10 @@ class Post extends Model
     use HasFactory;
 
     protected $table = 'post';
-    protected $fillable = ['judul', 'konten', 'sampul', 'slug'];
+    protected $fillable = ['judul', 'konten', 'sampul', 'slug', 'id_kategori'];
+
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class, 'id_kategori');
+    }
 }

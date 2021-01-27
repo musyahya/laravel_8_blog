@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,12 +23,9 @@ Route::get('/dashboard', function () {
     return view('admin/dashboard');
 });
 
-Route::get('/post', function () {
-    return view('admin/post');
-});
-
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('/kategori', KategoriController::class);
+Route::resource('/post', PostController::class);

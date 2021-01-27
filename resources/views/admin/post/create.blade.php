@@ -23,7 +23,7 @@
         </div>
         <div class="form-group">
             <label for="konten">Konten</label>
-            <textarea class="form-control" id="konten" rows="3" name="konten">{{old('konten')}}</textarea>
+            <textarea class="form-control" id="konten" rows="10" name="konten">{{old('konten')}}</textarea>
             @error('konten')
                 <small class="text-danger">{{ $message }}</small>
             @enderror

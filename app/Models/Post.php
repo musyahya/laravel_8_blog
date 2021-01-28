@@ -16,4 +16,9 @@ class Post extends Model
     {
         return $this->belongsTo(Kategori::class, 'id_kategori');
     }
+
+    public function tag()
+    {
+        return $this->belongsToMany(Tag::class, 'post_tag', 'id_post', 'id_tag');
+    }
 }

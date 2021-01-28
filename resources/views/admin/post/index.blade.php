@@ -18,8 +18,8 @@
                 <th scope="col">No</th>
                 <th scope="col">Sampul</th>
                 <th scope="col">Judul</th>
-                <th scope="col">Slug</th>
                 <th scope="col">Kategori</th>
+                <th scope="col">Tag</th>
                 <th scope="col">Aksi</th>
                 </tr>
             </thead>
@@ -29,8 +29,12 @@
                     <th scope="row">{{$loop->iteration}}</th>
                     <td><img src="/upload/post/{{$row->sampul}}" alt="" width="80px" height="80px"></td>
                     <td>{{$row->judul}}</td>
-                    <td>{{$row->slug}}</td>
                     <td>{{$row->kategori->nama}}</td>
+                    <td>
+                       @foreach ($row->tag as $tag)
+                           <span class="badge badge-secondary">{{$tag->nama}}</span>
+                       @endforeach
+                    </td>
                     <td width="25%">
                         <div class="btn-group" role="group" aria-label="Basic example">
                         <a href="/post/{{$row->id}}" class="btn btn-info btn-sm mr-1"><i class="fas fa-eye"></i> Detail</a>

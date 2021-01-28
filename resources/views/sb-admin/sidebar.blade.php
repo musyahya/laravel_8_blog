@@ -31,7 +31,7 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="/post">Post</a>
             <a class="collapse-item" href="/kategori">Kategori</a>
-            <a class="collapse-item" href="cards.html">Tag</a>
+            <a class="collapse-item" href="/tag">Tag</a>
             <a class="collapse-item" href="cards.html">Banner</a>
           </div>
         </div>

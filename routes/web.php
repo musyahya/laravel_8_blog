@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
@@ -16,9 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Route::get('/dashboard', function () {
     return view('admin/dashboard');
@@ -31,3 +30,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('/kategori', KategoriController::class);
 Route::resource('/post', PostController::class);
 Route::resource('/tag', TagController::class);
+
+Route::get('/', [ArtikelController::class, 'index']);
+Route::get('/{slug}', [ArtikelController::class, 'artikel']);
+Route::get('/artikel-kategori/{slug}', [ArtikelController::class, 'kategori']);
+Route::get('/artikel-tag/{slug}', [ArtikelController::class, 'tag']);

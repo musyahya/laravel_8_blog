@@ -32,7 +32,7 @@
                     <select class="form-control" id="kategori" name="kategori">
                         @foreach ($kategori as $row)
                             @if ($row->id == $post->id_kategori)
-                                <option selected value="{{$row->id}}">{{$row->nama}}</option>
+                                <option value="{{$row->id}}">{{$row->nama}}</option>
                             @endif
                         @endforeach
                         @foreach ($kategori as $row)

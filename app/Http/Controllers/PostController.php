@@ -128,6 +128,7 @@ class PostController extends Controller
 
             $data['sampul'] = $sampul;
         }
+        // dd($data);
 
         $post->update($data);
         $post->tag()->sync($request->tag);

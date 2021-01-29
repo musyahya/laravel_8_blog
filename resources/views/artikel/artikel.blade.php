@@ -2,7 +2,7 @@
 @section('title', 'Artikel')
 
 @section('content')
-   <div class="card mt-4">
+   <div class="card mt-4 shadow-sm">
         <img src="/upload/post/{{$artikel->sampul}}" height="400px" class="card-img-top" alt="...">
         <div class="card-body">
             <h3 class="card-title">{{$artikel->judul}}</h3>

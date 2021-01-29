@@ -14,6 +14,7 @@ class Tag extends Model
 
     public function post()
     {
+        // return $this->belongsToMany(Post::class, 'post_tag', 'id_post', 'id_tag');
         return $this->belongsToMany(Post::class, 'post_tag', 'id_tag', 'id_post');
     }
 }

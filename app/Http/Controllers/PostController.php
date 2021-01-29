@@ -115,7 +115,7 @@ class PostController extends Controller
         $data = [
             'judul' => $request->judul,
             'konten' => $request->konten,
-            'kategori' => $request->kategori,
+            'id_kategori' => $request->kategori,
             'slug' => Str::slug($request->judul, '-'),
         ];
 
@@ -128,7 +128,6 @@ class PostController extends Controller
 
             $data['sampul'] = $sampul;
         }
-        // dd($data);
 
         $post->update($data);
         $post->tag()->sync($request->tag);

@@ -5,7 +5,7 @@
     <div class="row mt-4">
        @foreach ($artikel as $row)
             <div class="col-md-4">
-                <div class="card">
+                <div class="card shadow-sm">
                     <a href="/{{$row->slug}}"><img src="/upload/post/{{$row->sampul}}" class="card-img-top" alt="..."></a>
                     <div class="card-body">
                         <h5 class="card-title">{{$row->judul}}</h5>

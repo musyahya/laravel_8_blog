@@ -33,11 +33,9 @@ class ArtikelController extends Controller
 
     public function tag($slug)  
     {
-        $artikel = Tag::select('id')->where('slug', $slug)->latest()->get();
+        $artikel = Tag::select('id')->where('slug', $slug)->latest()->firstOrFail();
         $artikel = $artikel->post;
-        dd($artikel);
-        return $artikel;die;
         $kategori = Kategori::select('slug', 'nama')->orderBy('nama', 'asc')->get();
-        return view('artikel/artikel', compact('artikel', 'kategori'));
+        return view('artikel/index', compact('artikel', 'kategori'));
     }
 }

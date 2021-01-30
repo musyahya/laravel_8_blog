@@ -51,6 +51,9 @@
   {{-- javascipte --}}
   @include('sb-admin/javascript')
 
+  {{-- ck editor --}}
+  @yield('ck-editor')
+
 </body>
 
 </html>

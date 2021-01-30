@@ -22,7 +22,7 @@
             </small>
             <hr>
 
-            <p class="card-text">{{$artikel->konten}}</p>
+            <p class="card-text">{!!$artikel->konten!!}</p>
         </div>
     </div>
 @endsection

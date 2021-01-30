@@ -45,8 +45,8 @@
             @enderror
         </div>
         <div class="form-group">
-            <label for="konten">Konten</label>
-            <textarea class="form-control" id="konten" rows="10" name="konten">{{old('konten')}}</textarea>
+            <label for="editor">Konten</label>
+            <textarea class="form-control" id="editor" rows="10" name="konten">{{old('konten')}}</textarea>
             @error('konten')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
@@ -54,4 +54,16 @@
         <button type="submit" class="btn btn-primary btn-sm">Tambah</button>
         <a href="/post" class="btn btn-secondary btn-sm">Kembali</a>
     </form>
+@endsection
+
+@section('ck-editor')
+    <script src="https://cdn.ckeditor.com/ckeditor5/25.0.0/classic/ckeditor.js"></script>
+
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#editor' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
 @endsection

@@ -2,9 +2,6 @@
 @section('title', 'Post')
 
 @section('content')
-    {{-- flashdata --}}
-    {!! session('sukses') !!}
-
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800">Post</h1>
 

@@ -32,7 +32,7 @@
             <a class="collapse-item" href="/post">Post</a>
             <a class="collapse-item" href="/kategori">Kategori</a>
             <a class="collapse-item" href="/tag">Tag</a>
-            <a class="collapse-item" href="cards.html">Banner</a>
+            <a class="collapse-item" href="/banner">Banner</a>
           </div>
         </div>
       </li>

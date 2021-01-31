@@ -8,6 +8,7 @@ use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
+use RealRashid\SweetAlert\Facades\Alert; 
 
 class PostController extends Controller
 {
@@ -61,11 +62,7 @@ class PostController extends Controller
             'slug' => Str::slug($request->judul, '-'),
         ])->tag()->attach($request->tag);
 
-        $request->session()->flash('sukses', '
-            <div class="alert alert-success" role="alert">
-                Data berhasil ditambahkan
-            </div>
-        ');
+        Alert::success('Sukses', 'Data berhasil ditambahkan');
         return redirect('/post');
     }
 
@@ -132,11 +129,7 @@ class PostController extends Controller
         $post->update($data);
         $post->tag()->sync($request->tag);
 
-        $request->session()->flash('sukses', '
-            <div class="alert alert-success" role="alert">
-                Data berhasil diubah
-            </div>
-        ');
+        Alert::success('Sukses', 'Data berhasil diubah');
         return redirect('/post');
     }
 
@@ -148,15 +141,25 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        $post = Post::select('sampul', 'id')->whereId($id)->first();
+    //    
+    }
+
+    public function konfirmasi($id)
+    {
+        alert()->question('Peringatan !', 'Anda yakin akan menghapus data ?')
+        ->showConfirmButton('<a href="/post/' . $id . '/delete" class="text-white" style="text-decoration: none"> Hapus</a>', '#3085d6')->toHtml()
+        ->showCancelButton('Batal', '#aaa')->reverseButtons();
+
+        return redirect('/post');
+    }
+
+    public function delete($id)
+    {
+        $post = Post::select('sampul', 'id')->whereId($id)->firstOrFail();
         File::delete('upload/post/' . $post->sampul);
         $post->delete();
 
-        request()->session()->flash('sukses', '
-            <div class="alert alert-success" role="alert">
-                Data berhasil dihapus
-            </div>
-        ');
+        Alert::success('Sukses', 'Data berhasil dihapus');
         return redirect('/post');
     }
 }

@@ -29,6 +29,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::resource('/kategori', KategoriController::class);
 Route::resource('/post', PostController::class);
+Route::get('/post/{id}/konfirmasi', [PostController::class, 'konfirmasi']);
+Route::get('/post/{id}/delete', [PostController::class, 'delete']);
 Route::resource('/tag', TagController::class);
 
 Route::get('/', [ArtikelController::class, 'index']);

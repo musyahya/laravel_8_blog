@@ -54,6 +54,9 @@
   {{-- ck editor --}}
   @yield('ck-editor')
 
+  {{-- sweet alert --}}
+  @include('sweetalert::alert')
+
 </body>
 
 </html>

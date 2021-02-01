@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Footer;
 use App\Models\Kategori;
 use App\Models\Post;
 use App\Models\Tag;
@@ -12,6 +13,11 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->footer = Footer::select('konten')->first();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -19,8 +25,9 @@ class PostController extends Controller
      */
     public function index()
     {
+        $footer = $this->footer;
         $post = Post::select('id', 'judul', 'sampul', 'id_kategori')->latest()->paginate(10);
-        return view('admin/post/index', compact('post'));
+        return view('admin/post/index', compact('post', 'footer'));
     }
 
     /**
@@ -30,9 +37,10 @@ class PostController extends Controller
      */
     public function create()
     {
+        $footer = $this->footer;
         $tag = Tag::select('id', 'nama')->get();
         $kategori = Kategori::select('id', 'nama')->get();
-        return view('admin/post/create', compact('kategori', 'tag'));
+        return view('admin/post/create', compact('kategori', 'tag', 'footer'));
     }
 
     /**
@@ -74,8 +82,9 @@ class PostController extends Controller
      */
     public function show($id)
     {
+        $footer = $this->footer;
         $post = Post::select('id', 'judul', 'sampul', 'konten', 'created_at')->whereId($id)->firstOrFail();
-        return view('admin/post/show', compact('post'));
+        return view('admin/post/show', compact('post', 'footer'));
     }
 
     /**
@@ -86,10 +95,11 @@ class PostController extends Controller
      */
     public function edit($id)
     {
+        $footer = $this->footer;
         $tag = Tag::select('id', 'nama')->get();
         $kategori = Kategori::select('id', 'nama')->get();
         $post = Post::select('id', 'judul', 'sampul', 'konten', 'id_kategori')->whereId($id)->firstOrFail();
-        return view('admin/post/edit', compact('post', 'kategori', 'tag'));
+        return view('admin/post/edit', compact('post', 'kategori', 'tag', 'footer'));
     }
 
     /**

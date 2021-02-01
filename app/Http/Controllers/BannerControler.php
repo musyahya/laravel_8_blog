@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Banner;
+use App\Models\Footer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -10,6 +11,11 @@ use Illuminate\Support\Facades\File;
 
 class BannerControler extends Controller
 {
+    public function __construct()
+    {
+        $this->footer = Footer::select('konten')->first();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -17,8 +23,9 @@ class BannerControler extends Controller
      */
     public function index()
     {
+        $footer = $this->footer;
         $banner = Banner::select('id', 'slug', 'sampul', 'judul')->latest()->paginate(10);
-        return view('admin/banner/index', compact('banner'));
+        return view('admin/banner/index', compact('banner', 'footer'));
     }
 
     /**
@@ -28,7 +35,8 @@ class BannerControler extends Controller
      */
     public function create()
     {
-        return view('admin/banner/create');
+        $footer = $this->footer;
+        return view('admin/banner/create', 'footer');
     }
 
     /**
@@ -67,8 +75,9 @@ class BannerControler extends Controller
      */
     public function show($id)
     {
+        $footer = $this->footer;
         $banner = Banner::select('id', 'judul', 'sampul', 'konten', 'created_at')->whereId($id)->firstOrFail();
-        return view('admin/banner/show', compact('banner'));
+        return view('admin/banner/show', compact('banner', 'footer'));
     }
 
     /**
@@ -79,8 +88,9 @@ class BannerControler extends Controller
      */
     public function edit($id)
     {
+        $footer = $this->footer;
         $banner = Banner::select('id', 'judul', 'sampul', 'konten')->whereId($id)->firstOrFail();
-        return view('admin/banner/edit', compact('banner'));
+        return view('admin/banner/edit', compact('banner', 'footer'));
     }
 
     /**

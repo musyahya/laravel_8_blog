@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\BannerControler;
+use App\Http\Controllers\FooterController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LogoController;
 use App\Http\Controllers\PostController;
@@ -40,6 +41,9 @@ Route::get('/post/{id}/delete', [PostController::class, 'delete']);
 Route::resource('/banner', BannerControler::class);
 Route::get('/banner/{id}/konfirmasi', [BannerControler::class, 'konfirmasi']);
 Route::get('/banner/{id}/delete', [BannerControler::class, 'delete']);
+
+Route::get('/footer', [FooterController::class, 'index']);
+Route::patch('/footer/{id}', [FooterController::class, 'update']);
 
 Route::get('/', [ArtikelController::class, 'index']);
 Route::get('/{slug}', [ArtikelController::class, 'artikel']);

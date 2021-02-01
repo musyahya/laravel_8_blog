@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Footer;
 use App\Models\Logo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -9,6 +10,11 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class LogoController extends Controller
 {
+    public function __construct()
+    {
+        $this->footer = Footer::select('konten')->first();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,8 +22,9 @@ class LogoController extends Controller
      */
     public function index()
     {
+        $footer = $this->footer;
         $logo = Logo::select('id', 'gambar')->first();
-        return view('admin/logo/index', compact('logo'));
+        return view('admin/logo/index', compact('logo', 'footer'));
     }
 
     /**
@@ -60,8 +67,9 @@ class LogoController extends Controller
      */
     public function edit($id)
     {
+        $footer = $this->footer;
         $logo = Logo::select('id', 'gambar')->first();
-        return view('admin/logo/edit', compact('logo'));
+        return view('admin/logo/edit', compact('logo', 'footer'));
     }
 
     /**

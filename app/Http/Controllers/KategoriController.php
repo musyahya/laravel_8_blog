@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Footer;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class KategoriController extends Controller
 {
+    public function __construct()
+    {
+        $this->footer = Footer::select('konten')->first();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,8 +21,9 @@ class KategoriController extends Controller
      */
     public function index()
     {
+        $footer = $this->footer;
         $kategori = Kategori::select('id', 'nama', 'slug')->latest()->simplePaginate(5);
-        return view('admin/kategori/index', compact('kategori'));
+        return view('admin/kategori/index', compact('kategori', 'footer'));
     }
 
     /**
@@ -26,7 +33,8 @@ class KategoriController extends Controller
      */
     public function create()
     {
-        return view('admin/kategori/create');
+        $footer = $this->footer;
+        return view('admin/kategori/create', compact('footer'));
     }
 
     /**
@@ -73,8 +81,9 @@ class KategoriController extends Controller
      */
     public function edit($id)
     {
+        $footer = $this->footer;
         $kategori = Kategori::select('id', 'nama')->whereId($id)->first();
-        return view('admin/kategori/edit', compact('kategori'));
+        return view('admin/kategori/edit', compact('kategori', 'footer'));
     }
 
     /**

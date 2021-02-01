@@ -1,8 +1,9 @@
 <!doctype html>
 <html lang="en">
 {{-- head --}}
-    @include('artikel/template/head')
-  <body>
+    @include('sb-admin/head')
+
+  <body id="page-top">
     {{-- navbar --}}
     @include('artikel/template/navbar')
 
@@ -10,7 +11,14 @@
         @yield('content')
     </div>
 
+    <!-- Footer -->
+      @include('sb-admin/footer')
+
+    <!-- Scroll to Top Button-->
+    @include('sb-admin/button-topbar')
+
    {{-- javascript --}}
-   @include('artikel/template/javascript')
+   @include('sb-admin/javascript')
   </body>
+  
 </html>

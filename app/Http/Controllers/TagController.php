@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Footer;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class TagController extends Controller
 {
+    public function __construct()
+    {
+        $this->footer = Footer::select('konten')->first();
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,8 +21,9 @@ class TagController extends Controller
      */
     public function index()
     {
+        $footer = $this->footer;
         $tag = Tag::select('id', 'nama', 'slug')->latest()->paginate(10);
-        return view('admin/tag/index', compact('tag'));
+        return view('admin/tag/index', compact('tag', 'footer'));
     }
 
     /**
@@ -26,7 +33,8 @@ class TagController extends Controller
      */
     public function create()
     {
-        return view('admin/tag/create');
+        $footer = $this->footer;
+        return view('admin/tag/create', compact('footer'));
     }
 
     /**
@@ -73,8 +81,9 @@ class TagController extends Controller
      */
     public function edit($id)
     {
+        $footer = $this->footer;
         $tag = Tag::select('id', 'nama')->whereId($id)->firstOrFail();
-        return view('admin/tag/edit', compact('tag'));
+        return view('admin/tag/edit', compact('tag', 'footer'));
     }
 
     /**

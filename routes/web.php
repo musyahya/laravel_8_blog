@@ -3,6 +3,7 @@
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\BannerControler;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\LogoController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +31,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::resource('/kategori', KategoriController::class);
 Route::resource('/tag', TagController::class);
+Route::resource('/logo', LogoController::class);
 
 Route::resource('/post', PostController::class);
 Route::get('/post/{id}/konfirmasi', [PostController::class, 'konfirmasi']);

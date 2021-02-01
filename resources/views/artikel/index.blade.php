@@ -12,6 +12,9 @@
             @foreach ($banner as $row)
                 <div class="carousel-item {{($loop->first) ? 'active' : ''}}">
                     <a href="/artikel-banner/{{$row->slug}}"><img src="/upload/banner/{{$row->sampul}}" height="400xp" class="d-block w-100" alt="..."></a>
+                    <div class="carousel-caption d-none d-md-block">
+                        <h3>{{$row->judul}}</h3>
+                    </div>
                 </div>
             @endforeach
         </div>

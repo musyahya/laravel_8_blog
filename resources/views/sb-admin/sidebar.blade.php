@@ -45,7 +45,7 @@
         </a>
         <div id="pengaturan" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <a class="collapse-item" href="utilities-color.html">Logo</a>
+            <a class="collapse-item" href="/logo">Logo</a>
             <a class="collapse-item" href="utilities-border.html">Footer</a>
             <a class="collapse-item" href="utilities-animation.html">Tentang Kami</a>
           </div>

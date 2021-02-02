@@ -8,6 +8,7 @@ use App\Models\Kategori;
 use App\Models\Logo;
 use App\Models\Post;
 use App\Models\Tag;
+use App\Models\Tentang;
 use Illuminate\Http\Request;
 
 class ArtikelController extends Controller
@@ -65,5 +66,14 @@ class ArtikelController extends Controller
         $banner = Banner::select('id', 'judul', 'konten', 'created_at', 'sampul')->where('slug', $slug)->firstOrFail();
         $kategori = Kategori::select('slug', 'nama')->orderBy('nama', 'asc')->get();
         return view('artikel/banner', compact('banner', 'kategori', 'logo', 'footer'));
+    }
+
+    public function tentang()
+    {
+        $footer = $this->footer;
+        $logo = Logo::select('gambar')->first();
+        $kategori = Kategori::select('slug', 'nama')->orderBy('nama', 'asc')->get();
+        $tentang = Tentang::select('konten', 'facebook', 'twitter', 'instagram')->first();
+        return view('artikel/tentang', compact('tentang', 'kategori', 'logo', 'footer'));
     }
 }

@@ -23,7 +23,7 @@
             </ul>
             <ul class="navbar-nav my-2 my-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Tentang Kami</a>
+                    <a class="nav-link" href="/artikel-tentang">Tentang Kami</a>
                 </li>
             </ul>
         </div>

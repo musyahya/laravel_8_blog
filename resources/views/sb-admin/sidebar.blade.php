@@ -47,7 +47,7 @@
           <div class="bg-white py-2 collapse-inner rounded">
             <a class="collapse-item" href="/logo">Logo</a>
             <a class="collapse-item" href="/footer">Footer</a>
-            <a class="collapse-item" href="utilities-animation.html">Tentang Kami</a>
+            <a class="collapse-item" href="tentang">Tentang Kami</a>
           </div>
         </div>
       </li>

@@ -7,6 +7,7 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LogoController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\TentangController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,6 +34,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('/kategori', KategoriController::class);
 Route::resource('/tag', TagController::class);
 Route::resource('/logo', LogoController::class);
+Route::resource('/tentang', TentangController::class);
 
 Route::resource('/post', PostController::class);
 Route::get('/post/{id}/konfirmasi', [PostController::class, 'konfirmasi']);
@@ -46,6 +48,7 @@ Route::get('/footer', [FooterController::class, 'index']);
 Route::patch('/footer/{id}', [FooterController::class, 'update']);
 
 Route::get('/', [ArtikelController::class, 'index']);
+Route::get('/artikel-tentang', [ArtikelController::class, 'tentang']);
 Route::get('/{slug}', [ArtikelController::class, 'artikel']);
 Route::get('/artikel-kategori/{slug}', [ArtikelController::class, 'kategori']);
 Route::get('/artikel-tag/{slug}', [ArtikelController::class, 'tag']);

@@ -36,7 +36,7 @@ class BannerControler extends Controller
     public function create()
     {
         $footer = $this->footer;
-        return view('admin/banner/create', 'footer');
+        return view('admin/banner/create', compact('footer'));
     }
 
     /**

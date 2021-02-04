@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\BannerControler;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FooterController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LogoController;
@@ -22,14 +23,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-
-Route::get('/dashboard', function () {
-    return view('admin/dashboard');
-});
-
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/dashboard', [DashboardController::class, 'index']);
 
 Route::resource('/kategori', KategoriController::class);
 Route::resource('/tag', TagController::class);

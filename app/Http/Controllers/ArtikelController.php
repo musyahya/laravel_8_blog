@@ -25,7 +25,8 @@ class ArtikelController extends Controller
         $banner = Banner::select('slug', 'sampul', 'judul')->latest()->get();
         $artikel = Post::select('sampul', 'judul', 'slug', 'created_at')->latest()->get();
         $kategori = Kategori::select('slug', 'nama')->orderBy('nama', 'asc')->get();
-        return view('artikel/index', compact('artikel', 'kategori', 'banner', 'logo', 'footer'));
+        $home = true;
+        return view('artikel/index', compact('artikel', 'kategori', 'banner', 'logo', 'footer', 'home'));
     }
 
     public function artikel($slug)
@@ -45,7 +46,8 @@ class ArtikelController extends Controller
         $kategori = Kategori::select('id')->where('slug', $slug)->firstOrFail();
         $artikel = Post::select('sampul', 'judul', 'slug', 'created_at')->where('id_kategori', $kategori->id)->latest()->get();
         $kategori = Kategori::select('slug', 'nama')->orderBy('nama', 'asc')->get();
-        return view('artikel/index', compact('artikel', 'kategori', 'banner', 'logo', 'footer'));
+        $kategori_dipilih = Kategori::select('nama', 'slug')->where('slug', $slug)->firstOrFail();
+        return view('artikel/index', compact('artikel', 'kategori', 'banner', 'logo', 'footer', 'kategori_dipilih'));
     }
 
     public function tag($slug)  
@@ -56,7 +58,8 @@ class ArtikelController extends Controller
         $artikel = Tag::select('id')->where('slug', $slug)->latest()->firstOrFail();
         $artikel = $artikel->post;
         $kategori = Kategori::select('slug', 'nama')->orderBy('nama', 'asc')->get();
-        return view('artikel/index', compact('artikel', 'kategori', 'banner', 'logo', 'footer'));
+        $tag_dipilih = Tag::select('nama')->where('slug', $slug)->firstOrFail();
+        return view('artikel/index', compact('artikel', 'kategori', 'banner', 'logo', 'footer', 'tag_dipilih'));
     }
 
     public function banner($slug)

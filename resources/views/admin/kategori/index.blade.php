@@ -2,6 +2,7 @@
 @section('title', 'Kategori')
 @section('kategori', 'active')
 @section('main', 'show')
+@section('main-active', 'active')
 
 @section('content')
     {{-- flashdata --}}

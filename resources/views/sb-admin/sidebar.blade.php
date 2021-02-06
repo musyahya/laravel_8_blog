@@ -22,7 +22,7 @@
       <hr class="sidebar-divider">
 
       <!-- Nav Item - Pages Collapse Menu -->
-      <li class="nav-item">
+      <li class="nav-item @yield('main-active')">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#main" aria-expanded="true" aria-controls="main">
            <i class="fas fa-fw fa-folder"></i>
           <span>Main</span>
@@ -38,7 +38,7 @@
       </li>
 
       <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item">
+      <li class="nav-item @yield('pengaturan-active')">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#pengaturan" aria-expanded="true" aria-controls="pengaturan">
           <i class="fas fa-fw fa-wrench"></i>
           <span>Pengaturan</span>

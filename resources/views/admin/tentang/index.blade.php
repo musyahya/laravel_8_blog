@@ -2,6 +2,7 @@
 @section('title', 'Tentang')
 @section('tentang', 'active')
 @section('pengaturan', 'show')
+@section('pengaturan-active', 'active')
 
 @section('content')
     <!-- Page Heading -->

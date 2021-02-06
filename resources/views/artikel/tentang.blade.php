@@ -1,5 +1,6 @@
 @extends('artikel/template/app')
 @section('title', 'Tentang Kami')
+@section('tentang', 'active')
 
 @section('content')
    <div class="card mt-4 shadow-sm">

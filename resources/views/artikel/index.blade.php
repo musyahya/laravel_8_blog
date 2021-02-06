@@ -1,5 +1,22 @@
 @extends('artikel/template/app')
-@section('title', 'Artikel')
+
+@isset($tag_dipilih)
+     @section('title')
+        Tag : {{$tag_dipilih->nama}}
+    @endsection
+@endisset
+
+@isset($kategori_dipilih)
+    @section('title')
+        Kategori : {{$kategori_dipilih->nama}}
+    @endsection
+    @section('kategori', 'active')
+@endisset
+
+@isset($home)
+    @section('title', 'Semua Post')
+    @section('home', 'active')
+@endisset
 
 @section('content')
     <div id="carouselExampleIndicators" class="carousel slide mt-4" data-ride="carousel">
@@ -28,6 +45,8 @@
         </a>
     </div>
 
+    <h2 class="my-4 text-center">@yield('title')</h2>
+    
     <div class="row mt-4">
        @foreach ($artikel as $row)
             <div class="col-md-4">

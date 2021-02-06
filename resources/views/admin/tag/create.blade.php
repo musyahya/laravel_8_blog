@@ -2,6 +2,7 @@
 @section('title', 'Tag')
 @section('tag', 'active')
 @section('main', 'show')
+@section('main-active', 'active')
 
 @section('content')
     <!-- Page Heading -->

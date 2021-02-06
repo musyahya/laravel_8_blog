@@ -2,6 +2,7 @@
 @section('title', 'Logo')
 @section('logo', 'active')
 @section('pengaturan', 'show')
+@section('pengaturan-active', 'active')
 
 @section('content')
     <!-- Page Heading -->

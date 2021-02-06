@@ -2,6 +2,7 @@
 @section('title', 'Post')
 @section('post', 'active')
 @section('main', 'show')
+@section('main-active', 'active')
 
 @section('content')
     <a href="/post/{{$post->id}}/edit" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>

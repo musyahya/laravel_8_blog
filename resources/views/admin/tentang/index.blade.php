@@ -1,5 +1,7 @@
 @extends('sb-admin/app')
 @section('title', 'Tentang')
+@section('tentang', 'active')
+@section('pengaturan', 'show')
 
 @section('content')
     <!-- Page Heading -->

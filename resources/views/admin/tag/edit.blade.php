@@ -1,5 +1,7 @@
 @extends('sb-admin/app')
 @section('title', 'Tag')
+@section('tag', 'active')
+@section('main', 'show')
 
 @section('content')
     <!-- Page Heading -->

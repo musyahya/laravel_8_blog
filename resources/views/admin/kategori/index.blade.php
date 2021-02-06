@@ -1,5 +1,7 @@
 @extends('sb-admin/app')
 @section('title', 'Kategori')
+@section('kategori', 'active')
+@section('main', 'show')
 
 @section('content')
     {{-- flashdata --}}

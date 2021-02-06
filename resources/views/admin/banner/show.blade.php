@@ -1,5 +1,7 @@
 @extends('sb-admin/app')
 @section('title', 'Banner')
+@section('banner', 'active')
+@section('main', 'show')
 
 @section('content')
     <a href="/banner/{{$banner->id}}/edit" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>

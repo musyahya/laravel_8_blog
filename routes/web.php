@@ -27,23 +27,27 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/dashboard', [DashboardController::class, 'index']);
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/dashboard', [DashboardController::class, 'index']);
 
-Route::resource('/kategori', KategoriController::class);
-Route::resource('/tag', TagController::class);
-Route::resource('/logo', LogoController::class);
-Route::resource('/tentang', TentangController::class);
+    Route::resource('/kategori', KategoriController::class);
+    Route::resource('/tag', TagController::class);
+    Route::resource('/logo', LogoController::class);
+    Route::resource('/tentang', TentangController::class);
 
-Route::resource('/post', PostController::class);
-Route::get('/post/{id}/konfirmasi', [PostController::class, 'konfirmasi']);
-Route::get('/post/{id}/delete', [PostController::class, 'delete']);
+    Route::resource('/post', PostController::class);
+    Route::get('/post/{id}/konfirmasi', [PostController::class, 'konfirmasi']);
+    Route::get('/post/{id}/delete', [PostController::class, 'delete']);
 
-Route::resource('/banner', BannerControler::class);
-Route::get('/banner/{id}/konfirmasi', [BannerControler::class, 'konfirmasi']);
-Route::get('/banner/{id}/delete', [BannerControler::class, 'delete']);
+    Route::resource('/banner', BannerControler::class);
+    Route::get('/banner/{id}/konfirmasi', [BannerControler::class, 'konfirmasi']);
+    Route::get('/banner/{id}/delete', [BannerControler::class, 'delete']);
 
-Route::get('/footer', [FooterController::class, 'index']);
-Route::patch('/footer/{id}', [FooterController::class, 'update']);
+    Route::get('/footer', [FooterController::class, 'index']);
+    Route::patch('/footer/{id}', [FooterController::class, 'update']);
+
+    
+});
 
 Route::get('/', [ArtikelController::class, 'index']);
 Route::get('/artikel-tentang', [ArtikelController::class, 'tentang']);

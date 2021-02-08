@@ -20,11 +20,24 @@
                         @endforeach
                     </div>
                 </li>
-            </ul>
-            <ul class="navbar-nav my-2 my-lg-0">
                 <li class="nav-item">
                     <a class="nav-link @yield('tentang')" href="/artikel-tentang">Tentang Kami</a>
                 </li>
+            </ul>
+            <ul class="navbar-nav my-2 my-lg-0">
+                @auth
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard">Admin</a>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/register">Register</a>
+                    </li>
+                @endauth
             </ul>
         </div>
     </div>

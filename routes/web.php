@@ -23,11 +23,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::group(['middleware' => ['auth']], function () {
+Route::group(['middleware' => ['verified']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index']);
 
     Route::resource('/kategori', KategoriController::class);

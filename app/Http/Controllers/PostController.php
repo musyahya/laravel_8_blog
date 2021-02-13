@@ -7,6 +7,7 @@ use App\Models\Kategori;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use RealRashid\SweetAlert\Facades\Alert; 
@@ -26,7 +27,7 @@ class PostController extends Controller
     public function index()
     {
         $footer = $this->footer;
-        $post = Post::select('id', 'judul', 'sampul', 'id_kategori')->latest()->paginate(10);
+        $post = Post::select('id', 'judul', 'sampul', 'id_kategori')->where('id_user', Auth::user()->id)->latest()->paginate(10);
         return view('admin/post/index', compact('post', 'footer'));
     }
 
@@ -68,6 +69,7 @@ class PostController extends Controller
             'konten' => $request->konten,
             'id_kategori' => $request->kategori,
             'slug' => Str::slug($request->judul, '-'),
+            'id_user' => Auth::user()->id
         ])->tag()->attach($request->tag);
 
         Alert::success('Sukses', 'Data berhasil ditambahkan');
@@ -83,7 +85,7 @@ class PostController extends Controller
     public function show($id)
     {
         $footer = $this->footer;
-        $post = Post::select('id', 'judul', 'sampul', 'konten', 'created_at')->whereId($id)->firstOrFail();
+        $post = Post::select('id', 'judul', 'sampul', 'konten', 'created_at')->whereId($id)->where('id_user', Auth::user()->id)->firstOrFail();
         return view('admin/post/show', compact('post', 'footer'));
     }
 
@@ -98,7 +100,7 @@ class PostController extends Controller
         $footer = $this->footer;
         $tag = Tag::select('id', 'nama')->get();
         $kategori = Kategori::select('id', 'nama')->get();
-        $post = Post::select('id', 'judul', 'sampul', 'konten', 'id_kategori')->whereId($id)->firstOrFail();
+        $post = Post::select('id', 'judul', 'sampul', 'konten', 'id_kategori')->whereId($id)->where('id_user', Auth::user()->id)->firstOrFail();
         return view('admin/post/edit', compact('post', 'kategori', 'tag', 'footer'));
     }
 
@@ -124,6 +126,7 @@ class PostController extends Controller
             'konten' => $request->konten,
             'id_kategori' => $request->kategori,
             'slug' => Str::slug($request->judul, '-'),
+            'id_user' => Auth::user()->id
         ];
 
         $post = Post::select('sampul', 'id')->whereId($id)->first();
@@ -165,7 +168,7 @@ class PostController extends Controller
 
     public function delete($id)
     {
-        $post = Post::select('sampul', 'id')->whereId($id)->firstOrFail();
+        $post = Post::select('sampul', 'id')->whereId($id)->where('id_user', Auth::user()->id)->firstOrFail();
         File::delete('upload/post/' . $post->sampul);
         $post->delete();
 

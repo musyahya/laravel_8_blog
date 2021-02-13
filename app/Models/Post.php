@@ -10,7 +10,7 @@ class Post extends Model
     use HasFactory;
 
     protected $table = 'post';
-    protected $fillable = ['judul', 'konten', 'sampul', 'slug', 'id_kategori'];
+    protected $fillable = ['judul', 'konten', 'sampul', 'slug', 'id_kategori', 'id_user'];
 
     public function kategori()
     {
@@ -20,5 +20,10 @@ class Post extends Model
     public function tag()
     {
         return $this->belongsToMany(Tag::class, 'post_tag', 'id_post', 'id_tag');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user');
     }
 }

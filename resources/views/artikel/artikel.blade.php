@@ -20,6 +20,9 @@
                     @endif
                 @endforeach
             </small>
+            <br>
+
+            <small>Author : <span class="text-muted"><a href="/artikel-author/{{$artikel->user->id}}">{{$artikel->user->name}}</a></span></small>
             <hr>
 
             <p class="card-text">{!!$artikel->konten!!}</p>

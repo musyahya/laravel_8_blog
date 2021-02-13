@@ -57,3 +57,4 @@ Route::get('/{slug}', [ArtikelController::class, 'artikel']);
 Route::get('/artikel-kategori/{slug}', [ArtikelController::class, 'kategori']);
 Route::get('/artikel-tag/{slug}', [ArtikelController::class, 'tag']);
 Route::get('/artikel-banner/{slug}', [ArtikelController::class, 'banner']);
+Route::get('/artikel-author/{id}', [ArtikelController::class, 'author']);

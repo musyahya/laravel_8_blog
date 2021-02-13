@@ -13,6 +13,13 @@
     @section('kategori', 'active')
 @endisset
 
+@isset($author_dipilih)
+    @section('title')
+        Author : {{$author_dipilih->name}}
+    @endsection
+    @section('author', 'active')
+@endisset
+
 @isset($home)
     @section('title', 'Semua Post')
     @section('home', 'active')
@@ -49,7 +56,7 @@
     
     <div class="row mt-4">
        @foreach ($artikel as $row)
-            <div class="col-md-4">
+            <div class="col-md-4 mt-5">
                 <div class="card shadow-sm">
                     <a href="/{{$row->slug}}"><img src="/upload/post/{{$row->sampul}}" class="card-img-top" alt="..."></a>
                     <div class="card-body">

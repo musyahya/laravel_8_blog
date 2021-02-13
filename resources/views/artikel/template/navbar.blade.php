@@ -20,6 +20,16 @@
                         @endforeach
                     </div>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle @yield('author')" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Author
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        @foreach ($author as $row)
+                            <a class="dropdown-item" href="/artikel-author/{{$row->id}}">{{$row->name}}</a>
+                        @endforeach
+                    </div>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link @yield('tentang')" href="/artikel-tentang">Tentang Kami</a>
                 </li>

@@ -9,6 +9,7 @@ use App\Http\Controllers\LogoController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\TentangController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,7 +47,8 @@ Route::group(['middleware' => ['verified']], function () {
     Route::get('/footer', [FooterController::class, 'index']);
     Route::patch('/footer/{id}', [FooterController::class, 'update']);
 
-    
+    Route::get('/user/{id}/setting', [UserController::class, 'setting']);
+    Route::patch('/user/{id}/setting', [UserController::class, 'ubah_password']);
 });
 
 Route::get('/', [ArtikelController::class, 'index']);

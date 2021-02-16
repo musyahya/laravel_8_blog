@@ -11,6 +11,9 @@ use App\Models\Tag;
 use App\Models\Tentang;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class ArtikelController extends Controller
 {
@@ -24,7 +27,7 @@ class ArtikelController extends Controller
         $footer = $this->footer;
         $logo = Logo::select('gambar')->first();
         $banner = Banner::select('slug', 'sampul', 'judul')->latest()->get();
-        $artikel = Post::select('sampul', 'judul', 'slug', 'created_at')->latest()->get();
+        $artikel = Post::select('sampul', 'judul', 'slug', 'created_at')->latest()->paginate(6);
         $kategori = Kategori::select('slug', 'nama')->orderBy('nama', 'asc')->get();
         $home = true;
         $author = User::select('id', 'name')->orderBy('name', 'asc')->get();
@@ -47,7 +50,7 @@ class ArtikelController extends Controller
         $logo = Logo::select('gambar')->first();
         $banner = Banner::select('slug', 'sampul', 'judul')->latest()->get();
         $kategori = Kategori::select('id')->where('slug', $slug)->firstOrFail();
-        $artikel = Post::select('sampul', 'judul', 'slug', 'created_at')->where('id_kategori', $kategori->id)->latest()->get();
+        $artikel = Post::select('sampul', 'judul', 'slug', 'created_at')->where('id_kategori', $kategori->id)->latest()->paginate(6);
         $kategori = Kategori::select('slug', 'nama')->orderBy('nama', 'asc')->get();
         $kategori_dipilih = Kategori::select('nama', 'slug')->where('slug', $slug)->firstOrFail();
         $author = User::select('id', 'name')->orderBy('name', 'asc')->get();
@@ -60,11 +63,19 @@ class ArtikelController extends Controller
         $logo = Logo::select('gambar')->first();
         $banner = Banner::select('slug', 'sampul', 'judul')->latest()->get();
         $artikel = Tag::select('id')->where('slug', $slug)->latest()->firstOrFail();
-        $artikel = $artikel->post;
+        $artikel = $this->paginate($artikel->post);
+        $artikel->withPath(request()->url());
         $kategori = Kategori::select('slug', 'nama')->orderBy('nama', 'asc')->get();
         $tag_dipilih = Tag::select('nama')->where('slug', $slug)->firstOrFail();
         $author = User::select('id', 'name')->orderBy('name', 'asc')->get();
         return view('artikel/index', compact('artikel', 'kategori', 'banner', 'logo', 'footer', 'tag_dipilih', 'author'));
+    }
+
+    public function paginate($items, $perPage = 6, $page = null, $options = [])
+    {
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
     }
 
     public function banner($slug)
@@ -92,7 +103,7 @@ class ArtikelController extends Controller
         $footer = $this->footer;
         $logo = Logo::select('gambar')->first();
         $banner = Banner::select('slug', 'sampul', 'judul')->latest()->get();
-        $artikel = Post::select('sampul', 'judul', 'slug', 'created_at')->where('id_user', $id)->latest()->get();
+        $artikel = Post::select('sampul', 'judul', 'slug', 'created_at')->where('id_user', $id)->latest()->paginate(6);
         $kategori = Kategori::select('slug', 'nama')->orderBy('nama', 'asc')->get();
         $author_dipilih = User::select('name')->whereId($id)->firstOrFail();
         $author = User::select('id', 'name')->orderBy('name', 'asc')->get();

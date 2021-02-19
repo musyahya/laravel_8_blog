@@ -49,8 +49,18 @@
 
         {{$post->links()}}
    @else
-        <div class="alert alert-info mt-4" role="alert">
-           Anda belum mempunyai data
-        </div>
+       @if (session('search'))
+             {!! session('search') !!}
+       @else
+            <div class="alert alert-info mt-4" role="alert">
+                Anda belum mempunyai data
+            </div>
+       @endif
    @endif
+@endsection
+
+@section('search-url', '/post/search')
+
+@section('search')
+    @include('sb-admin/search')
 @endsection

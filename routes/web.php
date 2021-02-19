@@ -39,6 +39,7 @@ Route::group(['middleware' => ['verified']], function () {
     Route::resource('/post', PostController::class);
     Route::get('/post/{id}/konfirmasi', [PostController::class, 'konfirmasi']);
     Route::get('/post/{id}/delete', [PostController::class, 'delete']);
+    Route::post('/post/search', [PostController::class, 'index']);
 
     Route::resource('/banner', BannerControler::class);
     Route::get('/banner/{id}/konfirmasi', [BannerControler::class, 'konfirmasi']);

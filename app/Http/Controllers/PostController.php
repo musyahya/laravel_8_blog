@@ -27,8 +27,24 @@ class PostController extends Controller
     public function index()
     {
         $footer = $this->footer;
-        $post = Post::select('id', 'judul', 'sampul', 'id_kategori')->where('id_user', Auth::user()->id)->latest()->paginate(10);
-        return view('admin/post/index', compact('post', 'footer'));
+
+        $search = '';
+        if (request()->search) {
+            $post = Post::select('id', 'judul', 'sampul', 'id_kategori')->where('id_user', Auth::user()->id)->where('judul', 'LIKE', '%'. request()->search .'%')->latest()->paginate(10);
+            $search = request()->search;
+
+            if (count($post) == 0) {
+                request()->session()->flash('search', '
+                    <div class="alert alert-success mt-4" role="alert">
+                        Data yang anda cari tidak ada
+                    </div>
+                '); 
+            }
+        } else {
+            $post = Post::select('id', 'judul', 'sampul', 'id_kategori')->where('id_user', Auth::user()->id)->latest()->paginate(10);
+        }
+       
+        return view('admin/post/index', compact('post', 'footer', 'search'));
     }
 
     /**

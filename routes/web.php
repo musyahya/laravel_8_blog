@@ -32,7 +32,11 @@ Route::group(['middleware' => ['verified']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index']);
 
     Route::resource('/kategori', KategoriController::class);
+    Route::post('/kategori/search', [KategoriController::class, 'index']);
+
     Route::resource('/tag', TagController::class);
+    Route::post('/tag/search', [TagController::class, 'index']);
+
     Route::resource('/logo', LogoController::class);
     Route::resource('/tentang', TentangController::class);
 
@@ -44,6 +48,7 @@ Route::group(['middleware' => ['verified']], function () {
     Route::resource('/banner', BannerControler::class);
     Route::get('/banner/{id}/konfirmasi', [BannerControler::class, 'konfirmasi']);
     Route::get('/banner/{id}/delete', [BannerControler::class, 'delete']);
+    Route::post('/banner/search', [BannerControler::class, 'index']);
 
     Route::get('/footer', [FooterController::class, 'index']);
     Route::patch('/footer/{id}', [FooterController::class, 'update']);

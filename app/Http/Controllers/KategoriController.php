@@ -22,8 +22,24 @@ class KategoriController extends Controller
     public function index()
     {
         $footer = $this->footer;
-        $kategori = Kategori::select('id', 'nama', 'slug')->latest()->simplePaginate(5);
-        return view('admin/kategori/index', compact('kategori', 'footer'));
+
+        $search = '';
+        if (request()->search) {
+            $kategori = Kategori::select('id', 'nama', 'slug')->where('nama', 'LIKE', '%' . request()->search . '%')->latest()->paginate(10);
+            $search = request()->search;
+
+            if (count($kategori) == 0) {
+                request()->session()->flash('search', '
+                    <div class="alert alert-success mt-4" role="alert">
+                        Data yang anda cari tidak ada
+                    </div>
+                ');
+            }
+        } else {
+            $kategori = Kategori::select('id', 'nama', 'slug')->latest()->paginate(10);
+        }
+
+        return view('admin/kategori/index', compact('kategori', 'footer', 'search'));
     }
 
     /**

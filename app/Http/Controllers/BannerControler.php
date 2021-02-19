@@ -24,8 +24,24 @@ class BannerControler extends Controller
     public function index()
     {
         $footer = $this->footer;
-        $banner = Banner::select('id', 'slug', 'sampul', 'judul')->latest()->paginate(10);
-        return view('admin/banner/index', compact('banner', 'footer'));
+
+        $search = '';
+        if (request()->search) {
+            $banner = Banner::select('id', 'slug', 'sampul', 'judul')->where('judul', 'LIKE', '%' . request()->search . '%')->latest()->paginate(10);
+            $search = request()->search;
+
+            if (count($banner) == 0) {
+                request()->session()->flash('search', '
+                    <div class="alert alert-success mt-4" role="alert">
+                        Data yang anda cari tidak ada
+                    </div>
+                ');
+            }
+        } else {
+            $banner = Banner::select('id', 'slug', 'sampul', 'judul')->latest()->paginate(10);
+        }
+
+        return view('admin/banner/index', compact('banner', 'footer', 'search'));
     }
 
     /**

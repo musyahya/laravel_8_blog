@@ -57,6 +57,8 @@
   {{-- sweet alert --}}
   @include('sweetalert::alert')
 
+  @yield('javascript')
+
 </body>
 
 </html>

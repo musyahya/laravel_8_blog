@@ -58,3 +58,18 @@
 @section('search')
     @include('sb-admin/search')
 @endsection
+
+@section('search-responsive')
+    @include('sb-admin/search-responsive')
+@endsection
+
+@section('javascript')
+    <script>
+        $lebar = window.screen.width;
+        console.log($lebar);
+        if ($lebar <= 500) {
+            var element = document.getElementById("main");
+            element.classList.remove("show");
+        }
+    </script>
+@endsection

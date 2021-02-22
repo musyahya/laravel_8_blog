@@ -64,12 +64,5 @@
 @endsection
 
 @section('javascript')
-    <script>
-        $lebar = window.screen.width;
-        console.log($lebar);
-        if ($lebar <= 500) {
-            var element = document.getElementById("main");
-            element.classList.remove("show");
-        }
-    </script>
+    @include('admin/navbar-mobile')
 @endsection

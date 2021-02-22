@@ -89,11 +89,29 @@ class ArtikelController extends Controller
         $banner = Banner::select('slug', 'sampul', 'judul')->latest()->get();
         $artikel = Tag::select('id')->where('slug', $slug)->latest()->firstOrFail();
         $artikel = $this->paginate($artikel->post);
+
+        $search = '';
+        request()->session()->forget('search');
+        if (request()->search) {
+            $search = request()->search;
+            $filter = $artikel->filter(function($item) use ($search){
+                if (stripos($item->judul, $search) !== false) {
+                    return true;
+                }
+            });
+            $artikel = $this->paginate($filter);
+
+            if (count($artikel) == 0) {
+                request()->session()->flash('search', 'Post yang anda cari tidak ada');
+            }
+        }
+        
+
         $artikel->withPath(request()->url());
         $kategori = Kategori::select('slug', 'nama')->orderBy('nama', 'asc')->get();
         $tag_dipilih = Tag::select('nama')->where('slug', $slug)->firstOrFail();
         $author = User::select('id', 'name')->orderBy('name', 'asc')->get();
-        return view('artikel/index', compact('artikel', 'kategori', 'banner', 'logo', 'footer', 'tag_dipilih', 'author'));
+        return view('artikel/index', compact('artikel', 'kategori', 'banner', 'logo', 'footer', 'tag_dipilih', 'author', 'search'));
     }
 
     public function paginate($items, $perPage = 6, $page = null, $options = [])

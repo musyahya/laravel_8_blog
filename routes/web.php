@@ -6,6 +6,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FooterController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LogoController;
+use App\Http\Controllers\PembacaController;
+use App\Http\Controllers\PenulisController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\TentangController;
@@ -55,6 +57,14 @@ Route::group(['middleware' => ['verified']], function () {
 
     Route::get('/user/{id}/setting', [UserController::class, 'setting']);
     Route::patch('/user/{id}/setting', [UserController::class, 'ubah_password']);
+
+    Route::resource('/penulis', PenulisController::class);
+    Route::get('/penulis/{id}/konfirmasi', [PenulisController::class, 'konfirmasi']);
+    Route::get('/penulis/{id}/delete', [PenulisController::class, 'delete']);
+    Route::post('/penulis/search', [PenulisController::class, 'index']);
+
+    Route::resource('/pembaca', PembacaController::class);
+    Route::post('/pembaca/search', [PembacaController::class, 'index']);
 });
 
 Route::get('/', [ArtikelController::class, 'index']);

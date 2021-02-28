@@ -19,7 +19,11 @@ class PembacaController extends Controller
 
         $search = '';
         if (request()->search) {
-            $pembaca = User::select('id', 'name', 'email')->where('name', 'LIKE', '%' . request()->search . '%')->latest()->paginate(10);
+            $pembaca = User::join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+            ->where('role_id', 3)
+            ->where('name', 'LIKE', '%' . request()->search . '%')
+            ->select('id', 'name', 'email')
+            ->paginate(10);
             $search = request()->search;
 
             if (count($pembaca) == 0) {
@@ -30,7 +34,10 @@ class PembacaController extends Controller
                 ');
             }
         } else {
-            $pembaca = User::select('id', 'name', 'email')->latest()->paginate(10);
+            $pembaca = User::join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+                ->where('role_id', 3)
+                ->select('id', 'name', 'email')
+                ->paginate(10);
         }
 
         return view('admin/pembaca/index', compact('pembaca', 'footer', 'search'));

@@ -6,7 +6,7 @@
 
 @section('content')
     <!-- Page Heading -->
-    <h1 class="h3 mb-4 text-gray-800">penulis</h1>
+    <h1 class="h3 mb-4 text-gray-800">Penulis</h1>
 
     <a href="/penulis/create" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i> Tambah penulis</a>
 

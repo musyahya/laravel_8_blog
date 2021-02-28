@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Footer;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert; 
 
@@ -20,7 +21,11 @@ class PenulisController extends Controller
         $footer = $this->footer;
         $search = '';
         if (request()->search) {
-            $penulis = User::select('id', 'name', 'email')->where('name', 'LIKE', '%' . request()->search . '%')->latest()->paginate(10);
+            $penulis = User::join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+            ->where('role_id', 2)
+            ->where('name', 'LIKE', '%' . request()->search . '%')
+            ->select('id', 'name', 'email')
+            ->paginate(10);
             $search = request()->search;
 
             if (count($penulis) == 0) {
@@ -31,7 +36,10 @@ class PenulisController extends Controller
                 ');
             }
         } else {
-            $penulis = User::select('id', 'name', 'email')->latest()->paginate(10);
+            $penulis = User::join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
+            ->where('role_id', 2)
+            ->select('id', 'name', 'email')
+            ->paginate(10);
         }
       
         return view('admin/penulis/index', compact('penulis', 'footer', 'search'));
@@ -67,7 +75,7 @@ class PenulisController extends Controller
             'name' => $request->nama,
             'email' => $request->email,
             'password' => Hash::make($request->password)
-        ]);
+        ])->assignRole('penulis');
 
         Alert::success('Sukses', 'Data berhasil ditambahkan');
         return redirect('/penulis');
@@ -129,6 +137,7 @@ class PenulisController extends Controller
 
     public function delete($id)
     {
+        DB::table('model_has_roles')->where('model_id', $id)->delete();
         User::whereId($id)->delete();
 
         Alert::success('Sukses', 'Data berhasil dihapus');

@@ -17,6 +17,9 @@
     <!-- Scroll to Top Button-->
     @include('sb-admin/button-topbar')
 
+   {{-- logout --}}
+   @include('sb-admin/logout-modal')
+  
    {{-- javascript --}}
    @include('sb-admin/javascript')
   </body>

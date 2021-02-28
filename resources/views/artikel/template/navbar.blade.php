@@ -36,9 +36,16 @@
             </ul>
             <ul class="navbar-nav my-2 my-lg-0">
                 @auth
+                @role('admin|penulis')
                     <li class="nav-item">
                         <a class="nav-link" href="/dashboard">Admin</a>
                     </li>
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="modal" data-target="#logoutModal" href="#">Logout</a>
+                    </li>
+                @endrole
+                   
                 @else
                     <li class="nav-item">
                         <a class="nav-link" href="/login">Login</a>

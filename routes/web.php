@@ -30,6 +30,15 @@ Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/cek-role', function () {
+    if (auth()->user()->hasRole(['admin', 'penulis'])) {
+        return redirect('/dashboard');
+    } else {
+        return redirect('/');
+    }
+    
+});
+
 Route::group(['middleware' => ['verified', 'role:admin|penulis']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index']);
 

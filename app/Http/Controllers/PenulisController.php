@@ -18,7 +18,6 @@ class PenulisController extends Controller
     public function index()
     {
         $footer = $this->footer;
-
         $search = '';
         if (request()->search) {
             $penulis = User::select('id', 'name', 'email')->where('name', 'LIKE', '%' . request()->search . '%')->latest()->paginate(10);

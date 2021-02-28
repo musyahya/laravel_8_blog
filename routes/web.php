@@ -30,7 +30,7 @@ Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::group(['middleware' => ['verified']], function () {
+Route::group(['middleware' => ['verified', 'role:admin|penulis']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index']);
 
     Route::resource('/kategori', KategoriController::class);
@@ -58,13 +58,15 @@ Route::group(['middleware' => ['verified']], function () {
     Route::get('/user/{id}/setting', [UserController::class, 'setting']);
     Route::patch('/user/{id}/setting', [UserController::class, 'ubah_password']);
 
-    Route::resource('/penulis', PenulisController::class);
-    Route::get('/penulis/{id}/konfirmasi', [PenulisController::class, 'konfirmasi']);
-    Route::get('/penulis/{id}/delete', [PenulisController::class, 'delete']);
-    Route::post('/penulis/search', [PenulisController::class, 'index']);
+    Route::middleware(['role:admin'])->group(function () {
+        Route::resource('/penulis', PenulisController::class);
+        Route::get('/penulis/{id}/konfirmasi', [PenulisController::class, 'konfirmasi']);
+        Route::get('/penulis/{id}/delete', [PenulisController::class, 'delete']);
+        Route::post('/penulis/search', [PenulisController::class, 'index']);
 
-    Route::resource('/pembaca', PembacaController::class);
-    Route::post('/pembaca/search', [PembacaController::class, 'index']);
+        Route::resource('/pembaca', PembacaController::class);
+        Route::post('/pembaca/search', [PembacaController::class, 'index']);
+    });
 });
 
 Route::get('/', [ArtikelController::class, 'index']);

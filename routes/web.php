@@ -5,6 +5,7 @@ use App\Http\Controllers\BannerControler;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FooterController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\LogoController;
 use App\Http\Controllers\PembacaController;
 use App\Http\Controllers\PenulisController;
@@ -85,3 +86,7 @@ Route::get('/artikel-kategori/{slug}', [ArtikelController::class, 'kategori']);
 Route::get('/artikel-tag/{slug}', [ArtikelController::class, 'tag']);
 Route::get('/artikel-banner/{slug}', [ArtikelController::class, 'banner']);
 Route::get('/artikel-author/{id}', [ArtikelController::class, 'author']);
+
+Route::middleware(['verified', 'role:pembaca'])->group(function () {
+    Route::get('/like/{id}', [LikeController::class, 'like']);
+});

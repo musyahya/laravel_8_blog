@@ -26,6 +26,8 @@
             <hr>
 
             <p class="card-text">{!!$artikel->konten!!}</p>
+
+            <a href="/like/{{$artikel->id}}" class="text-danger"><i class="fas fa-heart"></i> {{$like}} Like</a>
         </div>
     </div>
 @endsection

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Banner;
 use App\Models\Footer;
 use App\Models\Kategori;
+use App\Models\Like;
 use App\Models\Logo;
 use App\Models\Post;
 use App\Models\Tag;
@@ -54,7 +55,8 @@ class ArtikelController extends Controller
         $artikel = Post::select('id', 'judul', 'konten', 'id_kategori', 'created_at', 'sampul', 'id_user')->where('slug', $slug)->firstOrFail();
         $kategori = Kategori::select('slug', 'nama')->orderBy('nama', 'asc')->get();
         $author = User::select('id', 'name')->orderBy('name', 'asc')->get();
-        return view('artikel/artikel', compact('artikel', 'kategori', 'logo', 'footer', 'author'));
+        $like = Like::where('id_post', $artikel->id)->count();
+        return view('artikel/artikel', compact('artikel', 'kategori', 'logo', 'footer', 'author', 'like'));
     }
 
     public function kategori($slug)

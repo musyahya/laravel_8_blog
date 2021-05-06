@@ -52,6 +52,26 @@
         </a>
     </div>
 
+    @if ($rekomendasi->isNotEmpty())
+        <h2 class="my-4 text-center">Rekomendasi</h2>
+
+        <div class="row mt-4">
+            @foreach ($rekomendasi as $row)
+                    <div class="col-md-4 mt-5">
+                        <div class="card shadow-sm">
+                            <a href="/{{$row->post->slug}}"><img src="/upload/post/{{$row->post->sampul}}" class="card-img-top" alt="..."></a>
+                            <div class="card-body">
+                                <h5 class="card-title">{{$row->post->judul}}</h5>
+                                <p class="card-text"><small class="text-muted">{{$row->post->created_at->diffForHumans()}}</small></p>
+                            </div>
+                        </div>
+                    </div>
+            @endforeach
+        </div>
+
+        <div class="d-flex justify-content-center mt-4">{{$rekomendasi->links()}}</div>
+    @endif
+
     <h2 class="my-4 text-center">@yield('title')</h2>
 
     <div class="d-flex justify-content-center">

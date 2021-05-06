@@ -8,6 +8,7 @@ use App\Models\Kategori;
 use App\Models\Like;
 use App\Models\Logo;
 use App\Models\Post;
+use App\Models\Rekomendasi;
 use App\Models\Tag;
 use App\Models\Tentang;
 use App\Models\User;
@@ -46,7 +47,8 @@ class ArtikelController extends Controller
         $kategori = Kategori::select('slug', 'nama')->orderBy('nama', 'asc')->get();
         $home = true;
         $author = User::getAdminPenulis();
-        return view('artikel/index', compact('artikel', 'kategori', 'banner', 'logo', 'footer', 'home', 'author', 'search'));
+        $rekomendasi = Rekomendasi::select('id_post')->latest()->paginate(3);
+        return view('artikel/index', compact('artikel', 'kategori', 'banner', 'logo', 'footer', 'home', 'author', 'search', 'rekomendasi'));
     }
 
     public function artikel($slug)

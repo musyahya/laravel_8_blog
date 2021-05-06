@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\DB;
 
 class ArtikelController extends Controller
 {
@@ -44,7 +45,7 @@ class ArtikelController extends Controller
 
         $kategori = Kategori::select('slug', 'nama')->orderBy('nama', 'asc')->get();
         $home = true;
-        $author = User::select('id', 'name')->orderBy('name', 'asc')->get();
+        $author = User::getAdminPenulis();
         return view('artikel/index', compact('artikel', 'kategori', 'banner', 'logo', 'footer', 'home', 'author', 'search'));
     }
 
@@ -54,7 +55,7 @@ class ArtikelController extends Controller
         $logo = Logo::select('gambar')->first();
         $artikel = Post::select('id', 'judul', 'konten', 'id_kategori', 'created_at', 'sampul', 'id_user')->where('slug', $slug)->firstOrFail();
         $kategori = Kategori::select('slug', 'nama')->orderBy('nama', 'asc')->get();
-        $author = User::select('id', 'name')->orderBy('name', 'asc')->get();
+        $author = User::getAdminPenulis();
         $like = Like::where('id_post', $artikel->id)->count();
         return view('artikel/artikel', compact('artikel', 'kategori', 'logo', 'footer', 'author', 'like'));
     }
@@ -80,7 +81,7 @@ class ArtikelController extends Controller
 
         $kategori = Kategori::select('slug', 'nama')->orderBy('nama', 'asc')->get();
         $kategori_dipilih = Kategori::select('nama', 'slug')->where('slug', $slug)->firstOrFail();
-        $author = User::select('id', 'name')->orderBy('name', 'asc')->get();
+        $author = User::getAdminPenulis();
         return view('artikel/index', compact('artikel', 'kategori', 'banner', 'logo', 'footer', 'kategori_dipilih', 'author', 'search'));
     }
 
@@ -112,7 +113,7 @@ class ArtikelController extends Controller
         $artikel->withPath(request()->url());
         $kategori = Kategori::select('slug', 'nama')->orderBy('nama', 'asc')->get();
         $tag_dipilih = Tag::select('nama')->where('slug', $slug)->firstOrFail();
-        $author = User::select('id', 'name')->orderBy('name', 'asc')->get();
+        $author = User::getAdminPenulis();
         return view('artikel/index', compact('artikel', 'kategori', 'banner', 'logo', 'footer', 'tag_dipilih', 'author', 'search'));
     }
 
@@ -129,7 +130,7 @@ class ArtikelController extends Controller
         $logo = Logo::select('gambar')->first();
         $banner = Banner::select('id', 'judul', 'konten', 'created_at', 'sampul')->where('slug', $slug)->firstOrFail();
         $kategori = Kategori::select('slug', 'nama')->orderBy('nama', 'asc')->get();
-        $author = User::select('id', 'name')->orderBy('name', 'asc')->get();
+        $author = User::getAdminPenulis();
         return view('artikel/banner', compact('banner', 'kategori', 'logo', 'footer', 'author'));
     }
 
@@ -139,7 +140,7 @@ class ArtikelController extends Controller
         $logo = Logo::select('gambar')->first();
         $kategori = Kategori::select('slug', 'nama')->orderBy('nama', 'asc')->get();
         $tentang = Tentang::select('konten', 'facebook', 'twitter', 'instagram')->first();
-        $author = User::select('id', 'name')->orderBy('name', 'asc')->get();
+        $author = User::getAdminPenulis();
         return view('artikel/tentang', compact('tentang', 'kategori', 'logo', 'footer', 'author'));
     }
 
@@ -163,7 +164,7 @@ class ArtikelController extends Controller
 
         $kategori = Kategori::select('slug', 'nama')->orderBy('nama', 'asc')->get();
         $author_dipilih = User::select('name')->whereId($id)->firstOrFail();
-        $author = User::select('id', 'name')->orderBy('name', 'asc')->get();
+        $author = User::getAdminPenulis();
         return view('artikel/index', compact('artikel', 'kategori', 'banner', 'logo', 'footer', 'author_dipilih', 'author', 'search'));
     }
 }

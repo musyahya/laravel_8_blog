@@ -55,6 +55,7 @@ Route::group(['middleware' => ['verified', 'role:admin|penulis']], function () {
     Route::resource('/post', PostController::class);
     Route::get('/post/{id}/konfirmasi', [PostController::class, 'konfirmasi']);
     Route::get('/post/{id}/delete', [PostController::class, 'delete']);
+    Route::get('/post/{id}/rekomendasi', [PostController::class, 'rekomendasi']);
     Route::post('/post/search', [PostController::class, 'index']);
 
     Route::resource('/banner', BannerControler::class);

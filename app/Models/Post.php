@@ -26,4 +26,9 @@ class Post extends Model
     {
         return $this->belongsTo(User::class, 'id_user');
     }
+
+    public function rekomendasi()
+    {
+        return $this->hasOne(Rekomendasi::class, 'id_post');
+    }
 }

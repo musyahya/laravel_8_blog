@@ -35,8 +35,9 @@
                            <span class="badge badge-secondary">{{$tag->nama}}</span>
                        @endforeach
                     </td>
-                    <td width="25%">
+                    <td width="35%">
                         <div class="btn-group" role="group" aria-label="Basic example">
+                            <a href="/post/{{$row->id}}/rekomendasi" class="btn btn-warning btn-sm mr-1"><i class="{{$row->rekomendasi ? 'fas fa-star' : 'far fa-star'}}"></i> Rekomendasi</a>
                             <a href="/post/{{$row->id}}" class="btn btn-info btn-sm mr-1"><i class="fas fa-eye"></i> Detail</a>
                             <a href="/post/{{$row->id}}/edit" class="btn btn-primary btn-sm mr-1"><i class="fas fa-edit"></i> Edit</a>
                             <a href="/post/{{$row->id}}/konfirmasi" class="btn btn-danger btn-sm mr-1"><i class="fas fa-trash"></i> Hapus</a>

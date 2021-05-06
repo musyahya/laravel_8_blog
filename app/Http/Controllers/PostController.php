@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Footer;
 use App\Models\Kategori;
 use App\Models\Post;
+use App\Models\Rekomendasi;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use RealRashid\SweetAlert\Facades\Alert; 
@@ -190,5 +192,27 @@ class PostController extends Controller
 
         Alert::success('Sukses', 'Data berhasil dihapus');
         return redirect('/post');
+    }
+
+    public function rekomendasi($id)
+    {
+        $post = DB::table('post')
+            ->join('rekomendasi', 'post.id', '=', 'rekomendasi.id_post')
+            ->where('rekomendasi.id_post', $id)
+            ->get();
+
+        if ($post->isEmpty()) {
+            Rekomendasi::create([
+                'id_post' => $id
+            ]);
+
+            Alert::success('Sukses', 'Post berhasil direkomendasikan');
+            return redirect('/post');
+        } else {
+            Rekomendasi::where('id_post', $id)->delete();
+            Alert::success('Sukses', 'Post batal direkomendasikan');
+            return redirect('/post');
+        }
+        
     }
 }

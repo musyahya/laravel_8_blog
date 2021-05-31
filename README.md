@@ -59,7 +59,6 @@ extract file zip
 
 ```bash
 composer install
-copy .env.example menjadi .env
 ```
 
 ## Copy .Env

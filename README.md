@@ -92,5 +92,4 @@ Jangan ragu untuk memeriksa halaman masalah jika Anda ingin berkontribusi. **Ber
 
 ## License
 
-- Copyright © 2021 Adhi Musyahya.
-- **Sistem Informasi Akademik Sekolah is open-sourced software licensed under the MIT license.**
+- Copyright © 2021 Musyahya.

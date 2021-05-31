@@ -66,7 +66,6 @@ class ArtikelController extends Controller
     {
         $footer = $this->footer;
         $logo = Logo::select('gambar')->first();
-        $banner = Banner::select('slug', 'sampul', 'judul')->latest()->get();
         $kategori = Kategori::select('id')->where('slug', $slug)->firstOrFail();
        
         request()->session()->forget('search');
@@ -84,14 +83,13 @@ class ArtikelController extends Controller
         $kategori = Kategori::select('slug', 'nama')->orderBy('nama', 'asc')->get();
         $kategori_dipilih = Kategori::select('nama', 'slug')->where('slug', $slug)->firstOrFail();
         $author = User::getAdminPenulis();
-        return view('artikel/index', compact('artikel', 'kategori', 'banner', 'logo', 'footer', 'kategori_dipilih', 'author', 'search'));
+        return view('artikel/index', compact('artikel', 'kategori', 'logo', 'footer', 'kategori_dipilih', 'author', 'search'));
     }
 
     public function tag($slug)  
     {
         $footer = $this->footer;
         $logo = Logo::select('gambar')->first();
-        $banner = Banner::select('slug', 'sampul', 'judul')->latest()->get();
         $artikel = Tag::select('id')->where('slug', $slug)->latest()->firstOrFail();
         $artikel = $this->paginate($artikel->post);
 
@@ -116,7 +114,7 @@ class ArtikelController extends Controller
         $kategori = Kategori::select('slug', 'nama')->orderBy('nama', 'asc')->get();
         $tag_dipilih = Tag::select('nama')->where('slug', $slug)->firstOrFail();
         $author = User::getAdminPenulis();
-        return view('artikel/index', compact('artikel', 'kategori', 'banner', 'logo', 'footer', 'tag_dipilih', 'author', 'search'));
+        return view('artikel/index', compact('artikel', 'kategori', 'logo', 'footer', 'tag_dipilih', 'author', 'search'));
     }
 
     public function paginate($items, $perPage = 6, $page = null, $options = [])
@@ -150,7 +148,6 @@ class ArtikelController extends Controller
     {
         $footer = $this->footer;
         $logo = Logo::select('gambar')->first();
-        $banner = Banner::select('slug', 'sampul', 'judul')->latest()->get();
 
         request()->session()->forget('search');
         if (request()->search) {
@@ -167,6 +164,6 @@ class ArtikelController extends Controller
         $kategori = Kategori::select('slug', 'nama')->orderBy('nama', 'asc')->get();
         $author_dipilih = User::select('name')->whereId($id)->firstOrFail();
         $author = User::getAdminPenulis();
-        return view('artikel/index', compact('artikel', 'kategori', 'banner', 'logo', 'footer', 'author_dipilih', 'author', 'search'));
+        return view('artikel/index', compact('artikel', 'kategori', 'logo', 'footer', 'author_dipilih', 'author', 'search'));
     }
 }

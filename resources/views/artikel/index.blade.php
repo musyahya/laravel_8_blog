@@ -26,51 +26,55 @@
 @endisset
 
 @section('content')
-    <div id="carouselExampleIndicators" class="carousel slide mt-4" data-ride="carousel">
-        <ol class="carousel-indicators">
-            @foreach ($banner as $row)
-                <li data-target="#carouselExampleIndicators" data-slide-to="{{$loop->index}}" class="{{($loop->first) ? 'active' : ''}}"></li>
-            @endforeach
-        </ol>
-        <div class="carousel-inner">
-            @foreach ($banner as $row)
-                <div class="carousel-item {{($loop->first) ? 'active' : ''}}">
-                    <a href="/artikel-banner/{{$row->slug}}"><img src="/upload/banner/{{$row->sampul}}" height="400xp" class="d-block w-100" alt="..."></a>
-                    <div class="carousel-caption d-none d-md-block">
-                        <h3>{{$row->judul}}</h3>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-    </div>
-
-    @if ($rekomendasi->isNotEmpty())
-        <h2 class="my-4 text-center">Rekomendasi</h2>
-
-        <div class="row mt-4">
-            @foreach ($rekomendasi as $row)
-                    <div class="col-md-4 mt-5">
-                        <div class="card shadow-sm">
-                            <a href="/{{$row->post->slug}}"><img src="/upload/post/{{$row->post->sampul}}" class="card-img-top" alt="..."></a>
-                            <div class="card-body">
-                                <h5 class="card-title">{{$row->post->judul}}</h5>
-                                <p class="card-text"><small class="text-muted">{{$row->post->created_at->diffForHumans()}}</small></p>
-                            </div>
+   @isset($banner)
+        <div id="carouselExampleIndicators" class="carousel slide mt-4" data-ride="carousel">
+            <ol class="carousel-indicators">
+                @foreach ($banner as $row)
+                    <li data-target="#carouselExampleIndicators" data-slide-to="{{$loop->index}}" class="{{($loop->first) ? 'active' : ''}}"></li>
+                @endforeach
+            </ol>
+            <div class="carousel-inner">
+                @foreach ($banner as $row)
+                    <div class="carousel-item {{($loop->first) ? 'active' : ''}}">
+                        <a href="/artikel-banner/{{$row->slug}}"><img src="/upload/banner/{{$row->sampul}}" height="400xp" class="d-block w-100" alt="..."></a>
+                        <div class="carousel-caption d-none d-md-block">
+                            <h3>{{$row->judul}}</h3>
                         </div>
                     </div>
-            @endforeach
+                @endforeach
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
         </div>
+   @endisset
 
-        <div class="d-flex justify-content-center mt-4">{{$rekomendasi->links()}}</div>
-    @endif
+    @isset($rekomendasi)
+        @if ($rekomendasi->isNotEmpty())
+            <h2 class="my-4 text-center">Rekomendasi</h2>
+
+            <div class="row mt-4">
+                @foreach ($rekomendasi as $row)
+                        <div class="col-md-4 mt-5">
+                            <div class="card shadow-sm">
+                                <a href="/{{$row->post->slug}}"><img src="/upload/post/{{$row->post->sampul}}" class="card-img-top" alt="..."></a>
+                                <div class="card-body">
+                                    <h5 class="card-title">{{$row->post->judul}}</h5>
+                                    <p class="card-text"><small class="text-muted">{{$row->post->created_at->diffForHumans()}}</small></p>
+                                </div>
+                            </div>
+                        </div>
+                @endforeach
+            </div>
+
+            <div class="d-flex justify-content-center mt-4">{{$rekomendasi->links()}}</div>
+        @endif
+    @endisset
 
     <h2 class="my-4 text-center">@yield('title')</h2>
 

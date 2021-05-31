@@ -44,18 +44,34 @@ Laravel 8 blog dibaut oleh :
 
 ```bash
 git clone https://github.com/musyahya/laravel_8_blog.git
-cd Larevel_8_blog
-composer install
-copy .env.example menjadi .env
 ```
 
 **Download zip**
 
 ```bash
 extract file zip
-cd Larevel_8_blog
+```
+
+## Buka di kode editor
+
+
+## Install composer
+
+```bash
 composer install
 copy .env.example menjadi .env
+```
+
+## Copy .Env
+
+```bash
+copy .env.example menjadi .env
+```
+
+## Buat database di localhost 
+
+```bash
+nama database : laravel_8_blog
 ```
 
 ## Setting database di .env

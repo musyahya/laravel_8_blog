@@ -2,7 +2,10 @@
 
 ## Author
 
-Laravel 8 blog dibaut oleh : <a href="https://github.com/musyahya"> Musyahya </a>.
+Laravel 8 blog dibaut oleh :
+
+- Github : <a href="https://github.com/musyahya"> Musyahya </a>
+- Youtube : <a href="https://www.youtube.com/channel/UC1iCvpMssrHnUsWKEe2cOag"> Musyahya </a>
 
 ## Fitur 
 

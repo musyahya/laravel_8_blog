@@ -4,7 +4,7 @@
 
 Laravel 8 blog dibaut oleh :
 
-- Github : <a href="https://github.com/musyahya"> Musyahya </a>
+- Github : <a href="https://github.com/musyahya/laravel_8_blog"> Musyahya </a>
 - Youtube : <a href="https://www.youtube.com/channel/UC1iCvpMssrHnUsWKEe2cOag"> Musyahya </a>
 
 ## Fitur 
@@ -77,6 +77,12 @@ php artisan key:generate
 
 ```bash
 php artisan migrate --seed
+```
+
+## Buat storage link
+
+```bash
+php artisan storage:link
 ```
 
 ## Jalankan Serve

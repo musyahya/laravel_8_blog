@@ -16,7 +16,8 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.2",
         "realrashid/sweet-alert": "^3.2",
-        "spatie/laravel-permission": "^4.0"
+        "spatie/laravel-permission": "^4.0",
+        "unisharp/laravel-filemanager": "^2.2"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

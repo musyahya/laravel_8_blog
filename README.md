@@ -44,18 +44,33 @@ Laravel 8 blog dibaut oleh :
 
 ```bash
 git clone https://github.com/musyahya/laravel_8_blog.git
-cd Larevel_8_blog
-composer install
-copy .env.example menjadi .env
 ```
 
 **Download zip**
 
 ```bash
 extract file zip
-cd Larevel_8_blog
+```
+
+## Buka di kode editor
+
+
+## Install composer
+
+```bash
 composer install
+```
+
+## Copy .Env
+
+```bash
 copy .env.example menjadi .env
+```
+
+## Buat database di localhost 
+
+```bash
+nama database : laravel_8_blog
 ```
 
 ## Setting database di .env
@@ -98,5 +113,4 @@ Jangan ragu untuk memeriksa halaman masalah jika Anda ingin berkontribusi. **Ber
 
 ## License
 
-- Copyright © 2021 Adhi Musyahya.
-- **Sistem Informasi Akademik Sekolah is open-sourced software licensed under the MIT license.**
+- Copyright © 2021 Musyahya.
